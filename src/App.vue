@@ -162,27 +162,20 @@ const getWeather = async () => {
 }
 
 const getBackgroundImage = () => {
-   if (!weather.value || !weather.value.weather) return normal
+  if (!weather.value || !weather.value.weather?.length) {
+    return normal
+  }
 
   const type = weather.value.weather[0].main
 
   switch (type) {
-    case 'Clear':
-      return sunny
-
+    case 'Clear': return sunny
     case 'Rain':
     case 'Drizzle':
-    case 'Thunderstorm':
-      return rainy
-
-    case 'Clouds':
-      return cloudy
-
-    case 'Snow':
-      return snow
-
-    default:
-      return sunny
+    case 'Thunderstorm': return rainy
+    case 'Clouds': return cloudy
+    case 'Snow': return snow
+    default: return normal
   }
 }
 const renderChart = () => {
